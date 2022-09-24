@@ -40,3 +40,8 @@ t_data	*ft_data_new(char **argv)
 	ret->time_2slp = ft_atoi(argv[3]);
 	return (ret);
 }
+
+void	ft_data_del(t_data *dat)
+{
+	free(dat);
+}

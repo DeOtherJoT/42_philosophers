@@ -9,12 +9,23 @@
 
 typedef struct	s_data
 {
-	int		num_philo;
-	size_t	time_2die;
-	size_t	time_2eat;
-	size_t	time_2slp;
-	ssize_t	num_2eat;
+	int	num_philo;
+	int	time_2die;
+	int	time_2eat;
+	int	time_2slp;
+	int	num_2eat;
 }	t_data;
 
+/* Input Files */
+
+// Parse Arguments
+t_data	*parse_args(int argc, char **argv);
+t_data	*ft_data_new(char **argv);
+void	ft_data_del(t_data *dat);
+
+/* General Utils */
+int		ft_atoi(char *str);
+size_t	ft_strlen(char *str);
+int		error_msg(char *str);
 
 #endif

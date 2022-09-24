@@ -22,3 +22,19 @@ int	ft_atoi(char *str)
 	}
 	return (ret * neg);
 }
+
+size_t	ft_strlen(char *str)
+{
+	size_t	ret;
+
+	ret = 0;
+	while (str[ret])
+		ret++;
+	return (ret);
+}
+
+int	error_msg(char *str)
+{
+	write(2, str, ft_strlen(str));
+	return (0);
+}

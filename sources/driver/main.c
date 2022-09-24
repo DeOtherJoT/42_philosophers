@@ -16,22 +16,13 @@ int	main(int argc, char **argv)
 {
 	t_data	*args;
 
-	if (argc != 5 || argc != 6)
-	 	return (error_msg("Incorrect number of arguments")) ;
-	// if (argc == 4)
-	// {
-	// 	args = parse_args(argv);
-	// 	args->num_2eat = -1;
-	// }
-	// else if (argc == 5)
-	// {
-	// 	args = parse_args(argv);
-	// 	args->num_2eat = ft_atoi(argv[4]);
-	// 	if (args->num_2eat < 1)
-	// 		return(exit_error(args, "Philos must eat at least once."));
-	// }
+	if (argc < 5 || argc > 6)
+	 	return (error_msg("Incorrect number of arguments\n"));
 	args = parse_args(argc - 1, argv + 1);
-	think_tank(args);
+	if (args == NULL)
+		return (error_msg("Invalid arguments\n"));
+	if (think_tank(args) == NULL)
+		return (error_msg("Problem\n"));
 	ft_data_del(args);
 	return (0);
 }
