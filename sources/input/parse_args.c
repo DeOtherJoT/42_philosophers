@@ -4,6 +4,8 @@ t_data	*parse_args(int argc, char **argv)
 {
 	t_data	*ret;
 
+	if (check_args(argc, argv) == FALSE)
+		return (NULL);
 	ret = ft_data_new(argv);
 	if (argc == 4)
 		ret->num_2eat = 0;
@@ -44,4 +46,31 @@ t_data	*ft_data_new(char **argv)
 void	ft_data_del(t_data *dat)
 {
 	free(dat);
+}
+
+int	ft_isnum(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+int	check_args(int argc, char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (++i < argc)
+	{
+		if (ft_isnum(argv[i]) == FALSE)
+			return (FALSE);
+	}
+	return (TRUE); 
 }

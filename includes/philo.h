@@ -20,6 +20,10 @@
 # define K_SLEEP 470
 # define K_DEATH 1724
 
+// True and False
+# define TRUE 0
+# define FALSE 1
+
 typedef struct s_data
 {
 	int	num_philo;
@@ -49,6 +53,8 @@ typedef struct s_base
 t_data	*parse_args(int argc, char **argv);
 t_data	*ft_data_new(char **argv);
 void	ft_data_del(t_data *dat);
+int		ft_isnum(char *s);
+int		check_args(int argc, char **argv);
 
 /* Util Files */
 
