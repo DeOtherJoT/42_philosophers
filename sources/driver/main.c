@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	args = parse_args(argc - 1, argv + 1);
 	if (args == NULL)
 		return (error_msg("Invalid arguments", -2));
-	if (think_tank(args) == 0)
+	if (think_tank(args, argc) == 0)
 		return (error_msg("Problem\n", -3));
 	ft_data_del(args);
 	return (0);

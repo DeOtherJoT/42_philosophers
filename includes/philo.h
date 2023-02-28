@@ -41,15 +41,19 @@ typedef struct s_philo
 
 typedef struct s_base
 {
-	
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	state_shift;
 	pthread_mutex_t	write_mutex;
 }	t_base;
 
+/* Brain Files */
+
+// begin.c
+int	think_tank(t_data *input, int argc);
+
 /* Input Files */
 
-// Parse Arguments
+// parse_args.c
 t_data	*parse_args(int argc, char **argv);
 t_data	*ft_data_new(char **argv);
 void	ft_data_del(t_data *dat);
@@ -58,7 +62,7 @@ int		check_args(int argc, char **argv);
 
 /* Util Files */
 
-// Utils 1
+// utils_1.c
 int		ft_atoi(char *str);
 size_t	ft_strlen(char *str);
 int		error_msg(char *str, int err_no);
