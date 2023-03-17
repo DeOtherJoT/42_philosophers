@@ -16,15 +16,15 @@ Note that inputs are in milliseconds.
 
 int	main(int argc, char **argv)
 {
-	t_data	*args;
+	t_data	*data;
 
 	if (argc < 5 || argc > 6)
 	 	return (error_msg("Incorrect number of arguments", -1));
-	args = parse_args(argc - 1, argv + 1);
-	if (args == NULL)
+	data = parse_data(argc - 1, argv + 1);
+	if (data == NULL)
 		return (error_msg("Invalid arguments", -2));
-	if (think_tank(args) == 0)
+	if (think_tank(data) == 0)
 		return (error_msg("Problem\n", -3));
-	ft_data_del(args);
+	ft_data_del(data);
 	return (0);
 }

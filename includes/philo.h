@@ -15,10 +15,10 @@
 # define C_RESET "\033[0m"     /* RESET  */
 
 // Integer Keys of each state
-# define K_EAT 384
-# define K_THINK 551
-# define K_SLEEP 470
-# define K_DEATH 1724
+# define K_EAT 0
+# define K_THINK 1
+# define K_SLEEP 2
+# define K_DEATH 3
 
 // True and False
 # define TRUE 0
@@ -27,24 +27,32 @@
 typedef struct s_data
 {
 	int	num_philo;
-	int	time_2die;
-	int	time_2eat;
-	int	time_2slp;
+	int	t_2die;
+	int	t_2eat;
+	int	t_2slp;
 	int	num_2eat;
 }	t_data;
 
 typedef struct s_philo
 {
-	size_t	id;
-	t_data	*data;
+	pthread_t	th_id;
+	size_t		num_id;
+	int			l_fork;
+	int			r_fork;
+	int			num_ate;
+	size_t		to_die;
+	t_base		*base;
 }	t_philo;
 
 typedef struct s_base
 {
-	
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	state_shift;
-	pthread_mutex_t	write_mutex;
+	t_data			*data;
+	int				death_flag;
+	int				*fork_stat;
+	int				*philo_stat;
+	pthread_mutex_t	*fork_mtx;
+	pthread_mutex_t	state_mtx;
+	pthread_mutex_t	write_mtx;
 }	t_base;
 
 /* Input Files */
@@ -56,12 +64,25 @@ void	ft_data_del(t_data *dat);
 int		ft_isnum(char *s);
 int		check_args(int argc, char **argv);
 
+/* Brains Files */
+
+// begin.c
+int		think_tank(t_data *input);
+void	*routine(void *arg);
+
+// init_philos.c
+t_base	*init_base(t_data *input);
+void	init_philos(t_philo **philos, t_data *input);
+void	del_base(t_base *base, size_t num_philo);
+void	del_philos(t_philo **philos, size_t num_philo);
+
 /* Util Files */
 
 // Utils 1
 int		ft_atoi(char *str);
 size_t	ft_strlen(char *str);
 int		error_msg(char *str, int err_no);
+void	*ft_calloc(size_t count, size_t size);
 size_t	gettime_ms(void);
 
 #endif

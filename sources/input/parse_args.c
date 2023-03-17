@@ -37,9 +37,9 @@ t_data	*ft_data_new(char **argv)
 			return (NULL);
 	}
 	ret->num_philo = (size_t)ft_atoi(argv[0]);
-	ret->time_2die = (size_t)ft_atoi(argv[1]);
-	ret->time_2eat = (size_t)ft_atoi(argv[2]);
-	ret->time_2slp = (size_t)ft_atoi(argv[3]);
+	ret->t_2die = (size_t)ft_atoi(argv[1]);
+	ret->t_2eat = (size_t)ft_atoi(argv[2]);
+	ret->t_2slp = (size_t)ft_atoi(argv[3]);
 	return (ret);
 }
 
