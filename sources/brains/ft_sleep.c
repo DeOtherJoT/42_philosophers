@@ -2,5 +2,9 @@
 
 void	ft_sleep(t_philo *philo)
 {
-	// put down forks, go to sleep
+	size_t	time_now;
+
+	if (philo->base->death_flag == 1)
+		return ;
+	
 }
