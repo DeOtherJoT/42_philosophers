@@ -1,12 +1,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-// # include <unistd.h>
-// # include <stdlib.h>
-// # include <stdio.h>
-// # include <pthread.h>
-// # include <sys/time.h>
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -18,7 +12,7 @@
 # define C_G "\033[0;32m"	/* THINK */
 # define C_B "\033[0;34m"	/* SLEEP */
 # define C_R "\033[0;31m"   /* DEATH */
-# define C_N "\033[0m"		/* RESET */
+# define C_NC "\033[0m"		/* RESET */
 
 // Integer Keys of each state
 # define K_EAT 0
@@ -55,9 +49,8 @@ typedef struct s_base
 	t_data			*data;
 	int				death_flag;
 	int				*fork_stat;
-	int				*philo_stat;
 	pthread_mutex_t	*fork_mtx;
-	pthread_mutex_t	state_mtx;
+	pthread_mutex_t	death_mtx;
 	pthread_mutex_t	write_mtx;
 }	t_base;
 
