@@ -9,12 +9,11 @@ t_base	*init_base(t_data *input)
 	ret->data = input;
 	ret->death_flag = 0;
 	ret->fork_stat = ft_calloc(input->num_philo, sizeof(int));
-	ret->philo_stat = ft_calloc(input->num_philo, sizeof(int));
 	ret->fork_mtx = malloc(sizeof(pthread_mutex_t) * input->num_philo);
 	i = -1;
 	while (++i < input->num_philo)
 		pthread_mutex_init(&(ret->fork_mtx[i]), NULL);
-	pthread_mutex_init(&(ret->state_mtx), NULL);
+	pthread_mutex_init(&(ret->death_mtx), NULL);
 	pthread_mutex_init(&(ret->write_mtx), NULL);
 }
 
@@ -44,12 +43,11 @@ void	del_base(t_base *base, size_t num_philo)
 
 	ft_data_del(base->data);
 	free(base->fork_stat);
-	free(base->philo_stat);
 	i = -1;
 	while (++i < num_philo)
 		pthread_mutex_destroy(&(base->fork_mtx[i]));
 	free(base->fork_mtx);
-	pthread_mutex_destroy(&(base->state_mtx));
+	pthread_mutex_destroy(&(base->death_mtx));
 	pthread_mutex_destroy(&(base->write_mtx));
 	free(base);
 }
