@@ -29,7 +29,7 @@ void	init_philos(t_philo **philos, t_data *input)
 	while (++i < input->num_philo)
 	{
 		philos[i] = malloc(sizeof(t_philo));
-		philos[i]->num_id = i;
+		philos[i]->id = i;
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % input->num_philo;
 		philos[i]->num_ate = 0;

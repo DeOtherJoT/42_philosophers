@@ -1,6 +1,12 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+// # include <unistd.h>
+// # include <stdlib.h>
+// # include <stdio.h>
+// # include <pthread.h>
+// # include <sys/time.h>
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -8,11 +14,11 @@
 # include <sys/time.h>
 
 // Colours of each state
-# define C_EAT "\033[0;33m"    /* YELLOW */
-# define C_THINK "\033[0;32m"  /* GREEN  */
-# define C_SLEEP "\033[0;34m"  /* BLUE   */
-# define C_DEATH "\033[0;31m"  /* RED    */
-# define C_RESET "\033[0m"     /* RESET  */
+# define C_Y "\033[0;33m"	/* EAT   */
+# define C_G "\033[0;32m"	/* THINK */
+# define C_B "\033[0;34m"	/* SLEEP */
+# define C_R "\033[0;31m"   /* DEATH */
+# define C_N "\033[0m"		/* RESET */
 
 // Integer Keys of each state
 # define K_EAT 0
@@ -36,7 +42,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	pthread_t	th_id;
-	size_t		num_id;
+	size_t		id;
 	int			l_fork;
 	int			r_fork;
 	int			num_ate;
@@ -70,6 +76,9 @@ int		check_args(int argc, char **argv);
 int		think_tank(t_data *input);
 void	*routine(void *arg);
 
+// ft_think.c
+void	ft_think(t_philo *philo);
+
 // init_philos.c
 t_base	*init_base(t_data *input);
 void	init_philos(t_philo **philos, t_data *input);
@@ -84,5 +93,8 @@ size_t	ft_strlen(char *str);
 int		error_msg(char *str, int err_no);
 void	*ft_calloc(size_t count, size_t size);
 size_t	gettime_ms(void);
+
+// utils2.c
+void	print_state(t_philo *philo, int flag);
 
 #endif
