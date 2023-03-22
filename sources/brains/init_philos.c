@@ -3,7 +3,7 @@
 t_base	*init_base(t_data *input)
 {
 	t_base	*ret;
-	int		i;
+	size_t	i;
 
 	ret = malloc(sizeof(t_base));
 	ret->data = input;
@@ -15,31 +15,33 @@ t_base	*init_base(t_data *input)
 		pthread_mutex_init(&(ret->fork_mtx[i]), NULL);
 	pthread_mutex_init(&(ret->death_mtx), NULL);
 	pthread_mutex_init(&(ret->write_mtx), NULL);
+	pthread_mutex_init(&(ret->fstate_mtx), NULL);
+	return (ret);
 }
 
-void	init_philos(t_philo **philos, t_data *input)
+void	init_philos(t_philo ***philos, t_data *input)
 {
 	t_base	*base_data;
-	int		i;
+	size_t	i;
 
 	base_data = init_base(input);
 	i = -1;
-	philos = malloc(sizeof(t_philo *) * input->num_philo);
+	*philos = malloc(sizeof(t_philo *) * input->num_philo);
 	while (++i < input->num_philo)
 	{
-		philos[i] = malloc(sizeof(t_philo));
-		philos[i]->id = i;
-		philos[i]->l_fork = i;
-		philos[i]->r_fork = (i + 1) % input->num_philo;
-		philos[i]->num_ate = 0;
-		philos[i]->to_die = 0;
-		philos[i]->base = base_data;
+		(*philos)[i] = malloc(sizeof(t_philo));
+		(*philos)[i]->id = i;
+		(*philos)[i]->l_fork = i;
+		(*philos)[i]->r_fork = (i + 1) % input->num_philo;
+		(*philos)[i]->num_ate = 0;
+		(*philos)[i]->to_die = 0;
+		(*philos)[i]->base = base_data;
 	}
 }
 
 void	del_base(t_base *base, size_t num_philo)
 {
-	int	i;
+	size_t	i;
 
 	ft_data_del(base->data);
 	free(base->fork_stat);
@@ -49,12 +51,13 @@ void	del_base(t_base *base, size_t num_philo)
 	free(base->fork_mtx);
 	pthread_mutex_destroy(&(base->death_mtx));
 	pthread_mutex_destroy(&(base->write_mtx));
+	pthread_mutex_destroy(&(base->fstate_mtx));
 	free(base);
 }
 
 void	del_philos(t_philo **philos, size_t num_philo)
 {
-	int	i;
+	size_t	i;
 
 	del_base(philos[0]->base, num_philo);
 	i = -1;
