@@ -6,7 +6,7 @@ NAME	= philo
 
 GCC		= gcc -Wall -Wextra -Werror
 FSAN	= -fsanitize=thread -g
-RM		= rm - rf
+RM		= rm -rf
 
 #PATH#
 
@@ -21,9 +21,9 @@ MAIN	= $(DRV_DIR)main.c
 
 #SOURCE FILES#
 
-SRCS	=	$(addprefix $(BRN_DIR), begin.c) \
+SRCS	=	$(addprefix $(BRN_DIR), begin.c ft_eat.c ft_sleep.c ft_think.c init_philos.c) \
 			$(addprefix $(INP_DIR), parse_args.c) \
-			$(addprefix $(UTL_DIR), utils_1.c)
+			$(addprefix $(UTL_DIR), utils1.c utils2.c)
 
 OBJS	=	$(SRCS:.c=.o)
 
