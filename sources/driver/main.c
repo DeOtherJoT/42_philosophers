@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 5 || argc > 6)
 	 	return (error_msg("Incorrect number of arguments", -1));
-	data = parse_data(argc - 1, argv + 1);
+	data = parse_args(argc - 1, argv + 1);
 	if (data == NULL)
 		return (error_msg("Invalid arguments", -2));
 	if (think_tank(data) == 0)
