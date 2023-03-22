@@ -25,7 +25,6 @@ t_data	*ft_data_new(char **argv)
 {
 	t_data	*ret;
 	size_t	i;
-	int		temp;
 
 	ret = malloc(sizeof(t_data));
 	if (ret == NULL)
