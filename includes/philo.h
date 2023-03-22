@@ -12,6 +12,7 @@
 # define C_G "\033[0;32m"	/* THINK */
 # define C_B "\033[0;34m"	/* SLEEP */
 # define C_R "\033[0;31m"   /* DEATH */
+# define C_W "\033[0;37m"	/* FORK  */
 # define C_NC "\033[0m"		/* RESET */
 
 // Integer Keys of each state
@@ -26,12 +27,23 @@
 
 typedef struct s_data
 {
-	int	num_philo;
-	int	t_2die;
-	int	t_2eat;
-	int	t_2slp;
-	int	num_2eat;
+	size_t	num_philo;
+	size_t	t_2die;
+	size_t	t_2eat;
+	size_t	t_2slp;
+	size_t	num_2eat;
 }	t_data;
+
+typedef struct s_base
+{
+	t_data			*data;
+	int				death_flag;
+	int				*fork_stat;
+	pthread_mutex_t	*fork_mtx;
+	pthread_mutex_t	death_mtx;
+	pthread_mutex_t	write_mtx;
+	pthread_mutex_t	fstate_mtx;
+}	t_base;
 
 typedef struct s_philo
 {
@@ -44,15 +56,6 @@ typedef struct s_philo
 	t_base		*base;
 }	t_philo;
 
-typedef struct s_base
-{
-	t_data			*data;
-	int				death_flag;
-	int				*fork_stat;
-	pthread_mutex_t	*fork_mtx;
-	pthread_mutex_t	death_mtx;
-	pthread_mutex_t	write_mtx;
-}	t_base;
 
 /* Input Files */
 
@@ -68,13 +71,25 @@ int		check_args(int argc, char **argv);
 // begin.c
 int		think_tank(t_data *input);
 void	*routine(void *arg);
+void	dinner_cycle(t_philo *philo);
+
+// ft_eat.c
+void	ft_eat(t_philo *philo);
+void	unlock_forks(t_philo *philo, int l_fork, int r_fork);
+void	starve(t_philo *philo);
+
+// ft_sleep.c
+void	ft_sleep(t_philo *philo);
+void	my_usleep(t_philo *philo, size_t duration);
 
 // ft_think.c
 void	ft_think(t_philo *philo);
+void	queue_forks(t_philo *philo, int l_fork, int r_fork);
+int		grab_fork(t_philo *philo, t_base *base, int fork);
 
 // init_philos.c
 t_base	*init_base(t_data *input);
-void	init_philos(t_philo **philos, t_data *input);
+void	init_philos(t_philo ***philos, t_data *input);
 void	del_base(t_base *base, size_t num_philo);
 void	del_philos(t_philo **philos, size_t num_philo);
 
@@ -88,6 +103,7 @@ void	*ft_calloc(size_t count, size_t size);
 size_t	gettime_ms(void);
 
 // utils2.c
-void	print_state(t_philo *philo, int flag);
+void	print_state(t_philo *philo, char *colour, char *str);
+void	print_death(t_philo *philo);
 
 #endif
