@@ -19,7 +19,7 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	ret = 0;
-	while (*str >= '0' || *str <= '9')
+	while (*str && (*str >= '0' || *str <= '9'))
 	{
 		ret = ret * 10 + (*str - '0');
 		str++;
