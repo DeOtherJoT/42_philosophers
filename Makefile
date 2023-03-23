@@ -5,7 +5,7 @@ NAME	= philo
 #FLAGS & COMMANDS#
 
 GCC		= gcc -Wall -Wextra -Werror
-FSAN	= -fsanitize=thread -g
+FSAN	= -fsanitize=thread -g3
 RM		= rm -rf
 
 #PATH#
@@ -42,6 +42,7 @@ clean	:
 
 fclean	: clean
 	$(RM) $(NAME)
+	$(RM) philo.dSYM
 
 norm	:
 	norminette $(SRC_DIR)
