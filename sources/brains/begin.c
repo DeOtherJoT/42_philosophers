@@ -2,17 +2,17 @@
 
 int	think_tank(t_data *input)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	size_t	i;
 
-	init_philos(&philos, input);
+	philos = init_philos(input);
 	i = -1;
 	while (++i < input->num_philo)
-		pthread_create(&(philos[i]->th_id), NULL, &routine, &(philos[i]));
+		pthread_create(&(philos[i].th_id), NULL, &routine, &(philos[i]));
 	i = -1;
 	while (++i < input->num_philo)
-		pthread_join(philos[i]->th_id, NULL);
-	del_philos(philos, input->num_philo);
+		pthread_join((philos[i].th_id), NULL);
+	del_philos(&philos, input->num_philo);
 	return (1); // success
 }
 
@@ -24,12 +24,8 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->base->data->num_2eat == 0) // run infinitely
 	{
-		while (1)
-		{
+		while (philo->base->death_flag != 1)
 			dinner_cycle(philo);
-			if (philo->base->death_flag == 1)
-				break;
-		}
 	}
 	else // run only till the desired amount is reached
 	{
