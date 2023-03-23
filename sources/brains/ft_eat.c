@@ -14,10 +14,10 @@ void	ft_eat(t_philo *philo)
 		return ;
 	}
 	print_state(philo, C_Y, "is eating");
+	my_usleep(philo, philo->base->data->t_2eat);
 	philo->num_ate += 1;
 	unlock_forks(philo, philo->l_fork, philo->r_fork);
 	philo->to_die += philo->base->data->t_2die;
-	my_usleep(philo, philo->base->data->t_2eat);
 }
 
 void	starve(t_philo *philo)
@@ -39,5 +39,5 @@ void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
 	pthread_mutex_lock(&(philo->base->fstate_mtx));
 	philo->base->fork_stat[l_fork] = 0;
 	philo->base->fork_stat[r_fork] = 0;
-	pthread_mutex_lock(&(philo->base->fstate_mtx));
+	pthread_mutex_unlock(&(philo->base->fstate_mtx));
 }
