@@ -25,6 +25,5 @@ int	main(int argc, char **argv)
 		return (error_msg("Invalid arguments", -2));
 	if (think_tank(data) == 0)
 		return (error_msg("Problem\n", -3));
-	ft_data_del(data);
 	return (0);
 }
