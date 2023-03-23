@@ -89,7 +89,7 @@ int		grab_fork(t_philo *philo, t_base *base, int fork);
 
 // init_philos.c
 t_base	*init_base(t_data *input);
-void	init_philos(t_philo ***philos, t_data *input);
+t_philo	*init_philos(t_data *input);
 void	del_base(t_base *base, size_t num_philo);
 void	del_philos(t_philo **philos, size_t num_philo);
 
