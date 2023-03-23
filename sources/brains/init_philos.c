@@ -19,24 +19,25 @@ t_base	*init_base(t_data *input)
 	return (ret);
 }
 
-void	init_philos(t_philo ***philos, t_data *input)
+t_philo	*init_philos(t_data *input)
 {
 	t_base	*base_data;
+	t_philo	*ret;
 	size_t	i;
 
 	base_data = init_base(input);
 	i = -1;
-	*philos = malloc(sizeof(t_philo *) * input->num_philo);
+	ret = malloc(sizeof(t_philo) * input->num_philo);
 	while (++i < input->num_philo)
 	{
-		(*philos)[i] = malloc(sizeof(t_philo));
-		(*philos)[i]->id = i;
-		(*philos)[i]->l_fork = i;
-		(*philos)[i]->r_fork = (i + 1) % input->num_philo;
-		(*philos)[i]->num_ate = 0;
-		(*philos)[i]->to_die = 0;
-		(*philos)[i]->base = base_data;
+		(ret)[i].id = i;
+		(ret)[i].l_fork = i;
+		(ret)[i].r_fork = (i + 1) % input->num_philo;
+		(ret)[i].num_ate = 0;
+		(ret)[i].to_die = 0;
+		(ret)[i].base = base_data;
 	}
+	return (ret);
 }
 
 void	del_base(t_base *base, size_t num_philo)
@@ -59,9 +60,8 @@ void	del_philos(t_philo **philos, size_t num_philo)
 {
 	size_t	i;
 
-	del_base(philos[0]->base, num_philo);
+	if (philos[0]->base != NULL)
+		del_base(philos[0]->base, num_philo);
 	i = -1;
-	while (++i < num_philo)
-		free(philos[i]);
-	free(philos);
+	free(*philos);
 }
