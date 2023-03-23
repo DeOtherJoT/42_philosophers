@@ -35,8 +35,6 @@ void	my_usleep(t_philo *philo, size_t duration)
 			pthread_mutex_unlock(&(philo->base->death_mtx));
 			return ;
 		}
-		else
-			usleep(500);
+		usleep(500);
 	}
-	return ;
 }
