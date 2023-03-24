@@ -1,4 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthor <jthor@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 15:31:29 by jthor             #+#    #+#             */
+/*   Updated: 2023/03/24 15:31:31 by jthor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/philo.h"
+
+static int	ft_isnum(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+static int	check_args(int argc, char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (++i < argc)
+	{
+		if (ft_isnum(argv[i]) == FALSE)
+			return (FALSE);
+	}
+	return (TRUE);
+}
 
 t_data	*parse_args(int argc, char **argv)
 {
@@ -45,31 +84,4 @@ t_data	*ft_data_new(char **argv)
 void	ft_data_del(t_data *dat)
 {
 	free(dat);
-}
-
-int	ft_isnum(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
-int	check_args(int argc, char **argv)
-{
-	int	i;
-
-	i = -1;
-	while (++i < argc)
-	{
-		if (ft_isnum(argv[i]) == FALSE)
-			return (FALSE);
-	}
-	return (TRUE); 
 }
