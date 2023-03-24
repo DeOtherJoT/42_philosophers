@@ -24,7 +24,7 @@ static void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
 
 void	ft_eat(t_philo *philo)
 {
-	if (philo->base->death_flag == 1)
+	if (check_death(philo) == 1)
 		return ;
 	if (gettime_ms() > philo->to_die)
 	{

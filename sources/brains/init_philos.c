@@ -18,6 +18,7 @@ t_base	*init_base(t_data *input)
 	size_t	i;
 
 	ret = malloc(sizeof(t_base));
+	ret->start_time = gettime_ms();
 	ret->data = input;
 	ret->death_flag = 0;
 	ret->fork_stat = ft_calloc(input->num_philo, sizeof(int));

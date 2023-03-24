@@ -36,7 +36,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->base->data->num_2eat == 0)
 	{
-		while (philo->base->death_flag != 1)
+		while (check_death(philo) != 1)
 			dinner_cycle(philo);
 	}
 	else
@@ -45,7 +45,7 @@ void	*routine(void *arg)
 		while (++i < philo->base->data->num_2eat)
 		{
 			dinner_cycle(philo);
-			if (philo->base->death_flag == 1)
+			if (check_death(philo) == 1)
 				break ;
 		}
 	}

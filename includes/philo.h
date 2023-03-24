@@ -49,6 +49,7 @@ typedef struct s_data
 typedef struct s_base
 {
 	t_data			*data;
+	size_t			start_time;
 	int				death_flag;
 	int				*fork_stat;
 	pthread_mutex_t	*fork_mtx;
@@ -111,5 +112,6 @@ size_t	gettime_ms(void);
 // utils2.c
 void	print_state(t_philo *philo, char *colour, char *str);
 void	print_death(t_philo *philo);
+int		check_death(t_philo *philo);
 
 #endif

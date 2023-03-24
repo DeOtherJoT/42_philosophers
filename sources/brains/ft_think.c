@@ -16,7 +16,7 @@ static int	grab_fork(t_philo *philo, t_base *base, int fork)
 {
 	while (gettime_ms() < philo->to_die)
 	{
-		if (base->death_flag == 1)
+		if (check_death(philo) == 1)
 			return (0);
 		pthread_mutex_lock(&(base->fstate_mtx));
 		if (base->fork_stat[fork] == 0)
@@ -52,7 +52,7 @@ void	ft_think(t_philo *philo)
 {
 	if (philo->to_die == 0)
 		philo->to_die = gettime_ms() + philo->base->data->t_2die;
-	if (philo->base->death_flag == 1)
+	if (check_death(philo) == 1)
 		return ;
 	print_state(philo, C_G, "is thinking");
 	if (philo->id % 2 != 0)

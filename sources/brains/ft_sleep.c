@@ -18,7 +18,7 @@ Philos should not be having any forks
 
 void	ft_sleep(t_philo *philo)
 {
-	if (philo->base->death_flag == 1)
+	if (check_death(philo) == 1)
 		return ;
 	print_state(philo, C_B, "is sleeping");
 	my_usleep(philo, philo->base->data->t_2slp);
@@ -37,14 +37,11 @@ void	my_usleep(t_philo *philo, size_t duration)
 	exit_time = gettime_ms() + duration;
 	while (gettime_ms() < exit_time)
 	{
-		if (philo->base->death_flag == 1)
+		if (check_death(philo) == 1)
 			return ;
 		if (gettime_ms() > philo->to_die)
 		{
-			pthread_mutex_lock(&(philo->base->death_mtx));
-			philo->base->death_flag = 1;
-			print_death(philo);
-			pthread_mutex_unlock(&(philo->base->death_mtx));
+			starve(philo);
 			return ;
 		}
 		usleep(500);
