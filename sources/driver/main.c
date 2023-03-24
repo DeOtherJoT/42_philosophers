@@ -35,7 +35,6 @@ int	main(int argc, char **argv)
 	data = parse_args(argc - 1, argv + 1);
 	if (data == NULL)
 		return (error_msg("Invalid arguments", -2));
-	if (think_tank(data) == 0)
-		return (error_msg("Problem\n", -3));
+	dinner_table(data);
 	return (0);
 }

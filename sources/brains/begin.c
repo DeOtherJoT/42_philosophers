@@ -12,7 +12,7 @@
 
 #include "../../includes/philo.h"
 
-int	think_tank(t_data *input)
+void	dinner_table(t_data *input)
 {
 	t_philo	*philos;
 	size_t	i;
@@ -25,7 +25,6 @@ int	think_tank(t_data *input)
 	while (++i < input->num_philo)
 		pthread_join((philos[i].th_id), NULL);
 	del_philos(&philos, input->num_philo);
-	return (1);
 }
 
 void	*routine(void *arg)

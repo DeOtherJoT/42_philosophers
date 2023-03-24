@@ -79,7 +79,7 @@ void	ft_data_del(t_data *dat);
 /* Brains Files */
 
 // begin.c
-int		think_tank(t_data *input);
+void	dinner_table(t_data *input);
 void	*routine(void *arg);
 void	dinner_cycle(t_philo *philo);
 
