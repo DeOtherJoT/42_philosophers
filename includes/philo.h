@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthor <jthor@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 15:35:23 by jthor             #+#    #+#             */
+/*   Updated: 2023/03/24 15:35:26 by jthor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -56,15 +68,12 @@ typedef struct s_philo
 	t_base		*base;
 }	t_philo;
 
-
 /* Input Files */
 
 // parse_args.c
 t_data	*parse_args(int argc, char **argv);
 t_data	*ft_data_new(char **argv);
 void	ft_data_del(t_data *dat);
-int		ft_isnum(char *s);
-int		check_args(int argc, char **argv);
 
 /* Brains Files */
 
@@ -75,7 +84,6 @@ void	dinner_cycle(t_philo *philo);
 
 // ft_eat.c
 void	ft_eat(t_philo *philo);
-void	unlock_forks(t_philo *philo, int l_fork, int r_fork);
 void	starve(t_philo *philo);
 
 // ft_sleep.c
@@ -84,8 +92,6 @@ void	my_usleep(t_philo *philo, size_t duration);
 
 // ft_think.c
 void	ft_think(t_philo *philo);
-void	queue_forks(t_philo *philo, int l_fork, int r_fork);
-int		grab_fork(t_philo *philo, t_base *base, int fork);
 
 // init_philos.c
 t_base	*init_base(t_data *input);
