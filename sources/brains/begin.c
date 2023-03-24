@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   begin.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthor <jthor@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 15:30:27 by jthor             #+#    #+#             */
+/*   Updated: 2023/03/24 15:30:28 by jthor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/philo.h"
 
 int	think_tank(t_data *input)
@@ -13,7 +25,7 @@ int	think_tank(t_data *input)
 	while (++i < input->num_philo)
 		pthread_join((philos[i].th_id), NULL);
 	del_philos(&philos, input->num_philo);
-	return (1); // success
+	return (1);
 }
 
 void	*routine(void *arg)
@@ -22,19 +34,19 @@ void	*routine(void *arg)
 	size_t	i;
 
 	philo = (t_philo *)arg;
-	if (philo->base->data->num_2eat == 0) // run infinitely
+	if (philo->base->data->num_2eat == 0)
 	{
 		while (philo->base->death_flag != 1)
 			dinner_cycle(philo);
 	}
-	else // run only till the desired amount is reached
+	else
 	{
 		i = -1;
 		while (++i < philo->base->data->num_2eat)
 		{
 			dinner_cycle(philo);
 			if (philo->base->death_flag == 1)
-				break;
+				break ;
 		}
 	}
 	return (NULL);
