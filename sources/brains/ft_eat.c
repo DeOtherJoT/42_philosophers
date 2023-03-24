@@ -1,14 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_eat.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthor <jthor@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 15:30:34 by jthor             #+#    #+#             */
+/*   Updated: 2023/03/24 15:30:36 by jthor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/philo.h"
+
+static void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
+{
+	pthread_mutex_unlock(&(philo->base->fork_mtx[l_fork]));
+	pthread_mutex_unlock(&(philo->base->fork_mtx[r_fork]));
+	pthread_mutex_lock(&(philo->base->fstate_mtx));
+	philo->base->fork_stat[l_fork] = 0;
+	philo->base->fork_stat[r_fork] = 0;
+	pthread_mutex_unlock(&(philo->base->fstate_mtx));
+}
 
 void	ft_eat(t_philo *philo)
 {
-	// forks grabbed, time to eat
-	size_t	time_now;
-
 	if (philo->base->death_flag == 1)
 		return ;
-	time_now = gettime_ms();
-	if (time_now > philo->to_die)
+	if (gettime_ms() > philo->to_die)
 	{
 		starve(philo);
 		return ;
@@ -30,14 +48,4 @@ void	starve(t_philo *philo)
 		print_death(philo);
 	}
 	pthread_mutex_unlock(&(philo->base->death_mtx));
-}
-
-void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
-{
-	pthread_mutex_unlock(&(philo->base->fork_mtx[l_fork]));
-	pthread_mutex_unlock(&(philo->base->fork_mtx[r_fork]));
-	pthread_mutex_lock(&(philo->base->fstate_mtx));
-	philo->base->fork_stat[l_fork] = 0;
-	philo->base->fork_stat[r_fork] = 0;
-	pthread_mutex_unlock(&(philo->base->fstate_mtx));
 }
