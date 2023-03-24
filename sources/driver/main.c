@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthor <jthor@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 15:31:05 by jthor             #+#    #+#             */
+/*   Updated: 2023/03/24 15:31:06 by jthor            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/philo.h"
 
 /*
@@ -19,7 +31,7 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	if (argc < 5 || argc > 6)
-	 	return (error_msg("Incorrect number of arguments", -1));
+		return (error_msg("Incorrect number of arguments", -1));
 	data = parse_args(argc - 1, argv + 1);
 	if (data == NULL)
 		return (error_msg("Invalid arguments", -2));
