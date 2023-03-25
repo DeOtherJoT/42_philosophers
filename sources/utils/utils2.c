@@ -12,10 +12,21 @@
 
 #include "../../includes/philo.h"
 
+/**
+ * @brief	Returns the time in milliseconds since the program has started.
+ * 
+ */
+
 static size_t	format_ms(t_philo *philo)
 {
 	return (gettime_ms() - philo->base->start_time);
 }
+
+/**
+ * @brief	Prints out the current state of the philo if no philos have died
+ * 			yet.
+ * 
+ */
 
 void	print_state(t_philo *philo, char *colour, char *str)
 {
@@ -29,6 +40,11 @@ void	print_state(t_philo *philo, char *colour, char *str)
 	pthread_mutex_unlock(&(philo->base->write_mtx));
 }
 
+/**
+ * @brief	Prints out the death of the philo.
+ * 
+ */
+
 void	print_death(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->base->write_mtx));
@@ -37,6 +53,11 @@ void	print_death(t_philo *philo)
 	printf("%s\n", C_NC);
 	pthread_mutex_unlock(&(philo->base->write_mtx));
 }
+
+/**
+ * @brief	Returns the value of death_flag in the t_base struct.
+ * 
+ */
 
 int	check_death(t_philo *philo)
 {

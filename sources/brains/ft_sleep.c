@@ -12,9 +12,12 @@
 
 #include "../../includes/philo.h"
 
-/*
-Philos should not be having any forks
-*/
+/**
+ * @brief	The last part of the cycle.
+ * 			1. Checks if any philo died.
+ * 			2. Prints the current state of the philo.
+ * 
+ */
 
 void	ft_sleep(t_philo *philo)
 {
@@ -24,11 +27,12 @@ void	ft_sleep(t_philo *philo)
 	my_usleep(philo, philo->base->data->t_2slp);
 }
 
-/*
-usleep takes in microsecond, duration is in miliseconds.
-
-In between intervals have to make sure that the death flag is checked.
-*/
+/**
+ * @brief	Custom usleep function, since usleep() itself is inaccurate.
+ * 			Also allows for a philo to die throughout the duration of
+ * 			my_usleep().
+ * 
+ */
 
 void	my_usleep(t_philo *philo, size_t duration)
 {

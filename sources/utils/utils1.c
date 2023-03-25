@@ -12,9 +12,10 @@
 
 #include "../../includes/philo.h"
 
-/*
-Basic string to int function
-*/
+/**
+ * @brief	Basic string to int function
+ * 
+ */
 
 int	ft_atoi(char *str)
 {
@@ -39,9 +40,10 @@ int	ft_atoi(char *str)
 	return (ret * neg);
 }
 
-/*
-Basic strlen function
-*/
+/**
+ * @brief	Basic strlen function
+ * 
+ */
 
 size_t	ft_strlen(char *str)
 {
@@ -53,9 +55,11 @@ size_t	ft_strlen(char *str)
 	return (ret);
 }
 
-/*
-Prints out a custom error message
-*/
+/**
+ * @brief	Prints an error message and returns the error number passed as an
+ * 			argument.
+ * 
+ */
 
 int	error_msg(char *str, int err_no)
 {
@@ -65,9 +69,10 @@ int	error_msg(char *str, int err_no)
 	return (err_no);
 }
 
-/*
-Basic calloc function
-*/
+/**
+ * @brief	Basic calloc function
+ * 
+ */
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -86,9 +91,10 @@ void	*ft_calloc(size_t count, size_t size)
 	return (retptr);
 }
 
-/*
-Returns the current time in milliseconds
-*/
+/**
+ * @brief	Returns how many milliseconds has passed since January 1st 1970
+ * 
+ */
 
 size_t	gettime_ms(void)
 {

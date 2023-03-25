@@ -23,7 +23,7 @@ Input : 1 , 2 , 3 , 4 , [5]
 	4. time_to_sleep
 	5. number_of_times_each_philo_must_eat [optional]
 
-Note that inputs are in milliseconds.
+Note that time inputs are in milliseconds.
 */
 
 int	main(int argc, char **argv)

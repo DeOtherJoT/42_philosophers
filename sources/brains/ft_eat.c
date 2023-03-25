@@ -12,6 +12,11 @@
 
 #include "../../includes/philo.h"
 
+/**
+ * @brief unlocks the mutexes of the forks and updates their statuses.
+ * 
+ */
+
 static void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
 {
 	pthread_mutex_unlock(&(philo->base->fork_mtx[l_fork]));
@@ -21,6 +26,17 @@ static void	unlock_forks(t_philo *philo, int l_fork, int r_fork)
 	philo->base->fork_stat[r_fork] = 0;
 	pthread_mutex_unlock(&(philo->base->fstate_mtx));
 }
+
+/**
+ * @brief	The second part of the cycle.
+ * 			1.	Check for deaths.
+ * 			2.	Check if the philo has already died.
+ * 			3.	Print the state of the philosopher and delay it's death
+ * 				as it starts to eat.
+ *			4.	Lastly, increment the times it has eaten and drop forks.
+ * 
+ * @param philo 
+ */
 
 void	ft_eat(t_philo *philo)
 {
@@ -37,6 +53,12 @@ void	ft_eat(t_philo *philo)
 	philo->num_ate += 1;
 	unlock_forks(philo, philo->l_fork, philo->r_fork);
 }
+
+/**
+ * @brief	Starve function, ulitmately the function that declares the death
+ * 			of the philo.
+ * 
+ */
 
 void	starve(t_philo *philo)
 {

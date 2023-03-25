@@ -12,6 +12,17 @@
 
 #include "../../includes/philo.h"
 
+/**
+ * @brief	Driver function for the philo algorithm.
+ * 			1.	Creates an array of t_philo structs, each representing a
+ * 				philosopher.
+ * 			2.	A thread is then created for each philosopher and they run
+ * 				their routines, and joined back to once done.
+ * 			3.	Each struct is then freed.
+ * 
+ * @param input	the t_data struct with the input args parsed.
+ */
+
 void	dinner_table(t_data *input)
 {
 	t_philo	*philos;
@@ -26,6 +37,14 @@ void	dinner_table(t_data *input)
 		pthread_join((philos[i].th_id), NULL);
 	del_philos(&philos, input->num_philo);
 }
+
+/**
+ * @brief	Routine function that is run by each thread. Depending on whether
+ * 			the optional argument is provided.
+ * 
+ * @param arg
+ * @return void* 
+ */
 
 void	*routine(void *arg)
 {
@@ -50,6 +69,14 @@ void	*routine(void *arg)
 	}
 	return (NULL);
 }
+
+/**
+ * @brief	Cycles through helper functions that represent each state
+ * 			a philosopher can be in. The cycle is ends if a philo dies or
+ * 			the number of times to eat is fulfilled.
+ * 
+ * @param philo 
+ */
 
 void	dinner_cycle(t_philo *philo)
 {

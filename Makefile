@@ -31,7 +31,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 all		: $(NAME)
 
-$(NAME)	: $(OBJS)
+$(NAME)	: $(OBJS) $(MAIN)
 	$(GCC) $(INC) -o $(NAME) $(MAIN) $(OBJS)
 
 %.o		: %.c

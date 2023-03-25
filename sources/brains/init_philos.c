@@ -12,6 +12,11 @@
 
 #include "../../includes/philo.h"
 
+/**
+ * @brief Functions to initialise the t_base struct and t_philo struct
+ * 
+ */
+
 t_base	*init_base(t_data *input)
 {
 	t_base	*ret;
@@ -52,6 +57,11 @@ t_philo	*init_philos(t_data *input)
 	}
 	return (ret);
 }
+
+/**
+ * @brief Functions to properly free the t_base and t_philo structs.
+ * 
+ */
 
 void	del_base(t_base *base, size_t num_philo)
 {
