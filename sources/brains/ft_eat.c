@@ -32,10 +32,10 @@ void	ft_eat(t_philo *philo)
 		return ;
 	}
 	print_state(philo, C_Y, "is eating");
+	philo->to_die += philo->base->data->t_2die;
 	my_usleep(philo, philo->base->data->t_2eat);
 	philo->num_ate += 1;
 	unlock_forks(philo, philo->l_fork, philo->r_fork);
-	philo->to_die += philo->base->data->t_2die;
 }
 
 void	starve(t_philo *philo)
